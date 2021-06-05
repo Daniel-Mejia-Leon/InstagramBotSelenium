@@ -17,10 +17,21 @@ driver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]').c
 time.sleep(1)
 driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[2]/a').click()
 time.sleep(2)
-driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[4]/a').click()
-time.sleep(1)
-for i in range(2):
+
+def selectClickAndSend(box, message):
+    driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + box + ']/a').click()
+    time.sleep(1)
     driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')\
-        .send_keys('test')
+        .send_keys(message)
     driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
 
+boxNumber1 = "1"
+boxNumber2 = "2"
+boxNumber3 = "3"
+boxNumber4 = "4"
+messageToSend = "test"
+
+selectClickAndSend(boxNumber1, messageToSend)
+selectClickAndSend(boxNumber2, messageToSend)
+selectClickAndSend(boxNumber3, messageToSend)
+selectClickAndSend(boxNumber4, messageToSend)
