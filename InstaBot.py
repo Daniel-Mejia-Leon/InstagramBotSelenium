@@ -1,12 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import cv2
 import time
 from secretStuff import secretInsta
 
 def InstaBot(userName, passWord, boxNumber, message):
     picture = "C:\cork360\Documentos\Robot-Video.jpg"
-    image = cv2.imread("C:\cork360\Documentos\Robot-Video.jpg")
     path = "C:\cork360\Documentos\webDriver\chromedriver.exe"
     driver = webdriver.Chrome(path)
     driver.get("https://www.instagram.com")

@@ -8,8 +8,7 @@ root = Tk()
 root.title('Instagram Bot by Kidd')
 
 
-def InstaBot(userName, passWord, boxNumber, message):
-    picture = "C:\cork360\Documentos\Robot-Video.jpg"
+def InstaBot(userName, passWord, boxNumber, message, pathPic):
     path = "C:\cork360\Documentos\webDriver\chromedriver.exe"
     driver = webdriver.Chrome(path)
     driver.get("https://www.instagram.com")
@@ -20,29 +19,31 @@ def InstaBot(userName, passWord, boxNumber, message):
     driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(passWord)
     # clicking the LOG IN button
     driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click()
-    time.sleep(5)
+    time.sleep(7)
     # clicking the not now button
     driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
-    time.sleep(1)
+    time.sleep(3)
     # clicking the second not now button
     driver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]').click()
-    time.sleep(1)
+    time.sleep(3)
     # clicking the inbox
     driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[2]/a').click()
-    time.sleep(2)
-    time.sleep(1)
+    time.sleep(3)
     # clicking the first box
     driver.find_element_by_xpath(
         '//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + boxNumber + ']/a').click()
     time.sleep(1)
+    #locating the text area and sending the text message
     driver.find_element_by_xpath(
         '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys(
         message)
+    time.sleep(1)
+    #locating the enter button
     driver.find_element_by_xpath(
         '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
     # finding input for the image path
     driver.find_element_by_xpath(
-        '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(picture)
+        '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(pathPic)
     time.sleep(1)
 
 
@@ -65,28 +66,53 @@ sourceText.pack()
 space = Label(root, text="")
 space.pack()
 
-enterUserText = Label(root, text="Place your Instagram user name", font=("Arial", 10))
+enterUserText = Label(root, text="Place your Instagram user name", font=("Arial", 12))
 enterUserText.pack()
 #enter your userName
-userName = Entry(root, width=50)
+userName = Entry(root, width=50, justify="center", text="Insta_melach")
 userName.pack()
 space = Label(root, text="")
 space.pack()
 
-enterPasswordText = Label(root, text="Place your Instagram password", font=("Arial", 10))
+enterPasswordText = Label(root, text="Place your Instagram password", font=("Arial", 12))
 enterPasswordText.pack()
 #enter your password
-password = Entry(root, show="*", width=50)
+password = Entry(root, show="*", width=50, justify="center")
 password.pack()
 space = Label(root, text="")
 space.pack()
 
+#warnings on placing the number of messages
+warningNumberText = Label(root, text="Please enter the number of messages you want to send", font=("Arial", 12))
+warningNumberText.pack()
+warningNumberText1 = Label(root, text="Check your inbox and see how many people you are able to send a message to", font=("Arial", 8))
+warningNumberText1.pack()
+warningNumberText2 = Label(root, text="if you have only 3 chats then place 3, if u have 100 chats then place 100", font=("Arial", 8))
+warningNumberText2.pack()
+numberOfMessages = Entry(root, width=50, justify="center")
+numberOfMessages.pack()
+#space
+space = Label(root, text="")
+space.pack()
 
-number = "1"
-message = "this message was sent by a bot"
+
+messageToSendText = Label(root, text="Please enter the message you want to send", font=("Arial", 12))
+messageToSendText.pack()
+messageToSend = Entry(root, width=50, justify="center")
+messageToSend.pack()
+space = Label(root, text="")
+space.pack()
+
+
+imageToSendText = Label(root, text="Please enter the path of the image you want to send", font=("Arial", 12))
+imageToSendText.pack()
+imageToSendText1 = Label(root, text=r"e.g. C:\user\Documents\Your-Picture.jpg", font=("Arial", 8))
+imageToSendText1.pack()
+imageToSend = Entry(root, width=50, justify="center")
+imageToSend.pack()
 
 #code a button to start InstaBot()
-startBot = Button(root, text="Start Bot", command=lambda: InstaBot(userName.get(), password.get(), number, message))
+startBot = Button(root, text="Start Bot", command=lambda: InstaBot(userName.get(), password.get(), numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
 startBot.pack()
 space = Label(root, text="")
 space.pack()
