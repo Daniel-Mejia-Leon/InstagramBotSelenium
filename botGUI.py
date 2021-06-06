@@ -9,6 +9,7 @@ root.title('Instagram Bot by Kidd')
 
 
 def InstaBot(userName, passWord, boxNumber, message, pathPic):
+    start = 1
     path = "C:\cork360\Documentos\webDriver\chromedriver.exe"
     driver = webdriver.Chrome(path)
     driver.get("https://www.instagram.com")
@@ -29,22 +30,28 @@ def InstaBot(userName, passWord, boxNumber, message, pathPic):
     # clicking the inbox
     driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[2]/a').click()
     time.sleep(3)
-    # clicking the first box
-    driver.find_element_by_xpath(
-        '//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + boxNumber + ']/a').click()
-    time.sleep(1)
-    #locating the text area and sending the text message
-    driver.find_element_by_xpath(
-        '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys(
-        message)
-    time.sleep(1)
-    #locating the enter button
-    driver.find_element_by_xpath(
-        '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
-    # finding input for the image path
-    driver.find_element_by_xpath(
-        '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(pathPic)
-    time.sleep(1)
+    while int(boxNumber) > start:
+        for i in range(1, int(boxNumber) + 1):
+            print(i)
+            # clicking the first box
+            driver.find_element_by_xpath(
+                '//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + str(start) + ']/a').click()
+            time.sleep(1)
+            #locating the text area and sending the text message
+            driver.find_element_by_xpath(
+                '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys(
+                message)
+            time.sleep(1)
+            #locating the enter button
+            driver.find_element_by_xpath(
+                '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
+            # finding input for the image path
+            driver.find_element_by_xpath(
+                '//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(pathPic)
+            time.sleep(1)
+            start += 1
+
+
 
 
 #just a text
