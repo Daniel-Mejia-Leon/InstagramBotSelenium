@@ -27,15 +27,10 @@ time.sleep(1)
 #clicking the inbox
 driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/div[2]/a').click()
 time.sleep(2)
-#clicking the first box
-driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[1]/a').click()
+
 time.sleep(1)
 #clicking the textInput
 #driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys("test")
-
-#finding input for the image path
-sendingPic = driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(picture)
-
 
 def selectClickAndSend(box, message):
     driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + box + ']/a').click()
@@ -43,3 +38,29 @@ def selectClickAndSend(box, message):
     driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')\
         .send_keys(message)
     driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
+
+def sendImageAndText(box, message, image):
+    time.sleep(1)
+    # clicking the first box
+    driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[1]/div[2]/div/div/div/div/div[' + box + ']/a').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys(message)
+    driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
+    # finding input for the image path
+    driver.find_element_by_xpath('//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/form/input').send_keys(image)
+    time.sleep(1)
+
+
+box1 = "1"
+box2 = "2"
+box3 = "3"
+box4 = "4"
+message = "Hasta la vista baby!"
+
+sendImageAndText(box1, message, picture)
+sendImageAndText(box2, message, picture)
+sendImageAndText(box3, message, picture)
+sendImageAndText(box4, message, picture)
+
+
+
