@@ -11,21 +11,26 @@ root = Tk()
 root.title('Instagram Bot by Kidd')
 
 
-def InstaBotPic(userName, passWord, boxNumber, message, pathPic):
+def InstaBotPic(boxNumber, message, pathPic):
+    inside = False
     start = 1
     path = r"webDriver\chromedriver.exe"
     driver = webdriver.Chrome(path)
     driver.get("https://www.instagram.com")
     time.sleep(1)
-    # finding the "user here" then placing the user
-    bot = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(userName)
-    # finding the "pw here" then placing the password
-    driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(passWord)
-    # clicking the LOG IN button
-    driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click()
-    time.sleep(7)
-    # clicking the not now button
-    driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+    while not inside:
+        try:
+            time.sleep(1)
+            # clicking the not now button
+            driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+            while not inside:
+                inside = True
+
+            break
+
+        except NoSuchElementException:
+            print('waiting')
+
     time.sleep(3)
     # clicking the second not now button
     driver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]').click()
@@ -111,10 +116,6 @@ space.pack()
 #just a text
 welcomeText = Label(root, text="Welcome to your Instagram bot!", font=("Arial", 20))
 welcomeText.pack()
-warningText = Label(root, text="Please submit the required information. This bot does not save your information.")
-warningText.pack()
-sourceText = Label(root, text="You can check the source code at https://github.com/Daniel-Mejia-Leon/InstagramBotSelenium")
-sourceText.pack()
 
 #just a space
 space = Label(root, text="")
@@ -150,20 +151,20 @@ imageToSendText1 = Label(root, text=r"e.g. C:\user\Documents\Your-Picture.jpg", 
 imageToSendText1.pack()
 imageToSend = Entry(root, width=50, justify="center")
 imageToSend.pack()
+
+
+#code a button to start InstaBot()
+startBotWitPic = Button(root, text="Start Bot WITH WESSAGE AND PICTURE", command=lambda: InstaBotPic(numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
+startBotWitPic.pack()
+space = Label(root, text="")
+space.pack()
 space = Label(root, text="")
 space.pack()
 
-#code a button to start InstaBot()
-# startBotWitPic = Button(root, text="Start Bot WITH WESSAGE AND PICTURE", command=lambda: InstaBotPic(userName.get(), password.get(), numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
-# startBotWitPic.pack()
-# space = Label(root, text="")
-# space.pack()
-# space = Label(root, text="")
-# space.pack()
 
+warningText = Label(root, text="Please submit the required information. This bot does not save your information.")
+warningText.pack()
+sourceText = Label(root, text="You can check the source code at https://github.com/Daniel-Mejia-Leon/InstagramBotSelenium")
+sourceText.pack()
 
-# if start:
-#     InstaBot(userNameFun(), passwordFun(), number, message)
-
-# text.grid(row=0, column=0)
 root.mainloop()
