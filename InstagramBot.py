@@ -1,5 +1,8 @@
 from tkinter import *
+
+import selenium
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -51,21 +54,25 @@ def InstaBotPic(userName, passWord, boxNumber, message, pathPic):
             time.sleep(1)
             start += 1
 
-def InstaBotNoPic(userName, passWord, boxNumber, message):
+def InstaBotNoPic(boxNumber, message):
+    inside = False
     start = 1
     path = r"webDriver\chromedriver.exe"
     driver = webdriver.Chrome(path)
     driver.get("https://www.instagram.com")
     time.sleep(1)
-    # finding the "user here" then placing the user
-    bot = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(userName)
-    # finding the "pw here" then placing the password
-    driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(passWord)
-    # clicking the LOG IN button
-    driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click()
-    time.sleep(7)
-    # clicking the not now button
-    driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+    while not inside:
+        try:
+            time.sleep(1)
+            # clicking the not now button
+            driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+            while not inside:
+                inside = True
+
+            break
+        except NoSuchElementException:
+            print('waiting')
+
     time.sleep(3)
     # clicking the second not now button
     driver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]').click()
@@ -113,22 +120,6 @@ sourceText.pack()
 space = Label(root, text="")
 space.pack()
 
-enterUserText = Label(root, text="Place your Instagram user name", font=("Arial", 12))
-enterUserText.pack()
-#enter your userName
-userName = Entry(root, width=30, justify="center", text="Insta_melach")
-userName.pack()
-space = Label(root, text="")
-space.pack()
-
-enterPasswordText = Label(root, text="Place your Instagram password", font=("Arial", 12))
-enterPasswordText.pack()
-#enter your password
-password = Entry(root, show="*", width=30, justify="center")
-password.pack()
-space = Label(root, text="")
-space.pack()
-
 #warnings on placing the number of messages
 warningNumberText = Label(root, text="Please enter the number of messages you want to send", font=("Arial", 12))
 warningNumberText.pack()
@@ -147,7 +138,7 @@ messageToSendText = Label(root, text="Please enter the message you want to send"
 messageToSendText.pack()
 messageToSend = Entry(root, width=50, justify="center")
 messageToSend.pack()
-startBotNoPic = Button(root, text="Start Bot WITH JUST MESSAGE", command=lambda: InstaBotNoPic(userName.get(), password.get(), numberOfMessages.get(), messageToSend.get()))
+startBotNoPic = Button(root, text="Start Bot WITH JUST MESSAGE", command=lambda: InstaBotNoPic(numberOfMessages.get(), messageToSend.get()))
 startBotNoPic.pack()
 space = Label(root, text="")
 space.pack()
@@ -159,14 +150,16 @@ imageToSendText1 = Label(root, text=r"e.g. C:\user\Documents\Your-Picture.jpg", 
 imageToSendText1.pack()
 imageToSend = Entry(root, width=50, justify="center")
 imageToSend.pack()
+space = Label(root, text="")
+space.pack()
 
 #code a button to start InstaBot()
-startBotWitPic = Button(root, text="Start Bot WITH WESSAGE AND PICTURE", command=lambda: InstaBotPic(userName.get(), password.get(), numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
-startBotWitPic.pack()
-space = Label(root, text="")
-space.pack()
-space = Label(root, text="")
-space.pack()
+# startBotWitPic = Button(root, text="Start Bot WITH WESSAGE AND PICTURE", command=lambda: InstaBotPic(userName.get(), password.get(), numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
+# startBotWitPic.pack()
+# space = Label(root, text="")
+# space.pack()
+# space = Label(root, text="")
+# space.pack()
 
 
 # if start:
