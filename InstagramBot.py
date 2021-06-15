@@ -132,15 +132,15 @@ space = Label(root, text="")
 space.pack()
 
 #warnings on placing the number of messages
-warningNumberText = Label(root, text="Please enter the number of messages you want to send", font=("Arial", 12))
+warningNumberText = Label(root, text="This bot will send the message to every contact in your Instagram inbox", font=("Arial", 12))
 warningNumberText.pack()
-warningNumberText1 = Label(root, text="This number must be based on the number of chats you have in your inbox\n"
-                                      "The system will start sending the message from the chat 1 to the number you "
-                                      "enter", font=("Arial", 9))
-warningNumberText1.pack()
-numberOfMessages = Entry(root, width=10, justify="center")
-numberOfMessages.pack()
-#space
+# warningNumberText1 = Label(root, text="This number must be based on the number of chats you have in your inbox\n"
+#                                       "The system will start sending the message from the chat 1 to the number you "
+#                                       "enter.", font=("Arial", 9))
+# warningNumberText1.pack()
+# numberOfMessages = Entry(root, width=10, justify="center")
+# numberOfMessages.pack()
+# #space
 space = Label(root, text="")
 space.pack()
 
@@ -149,7 +149,7 @@ messageToSendText = Label(root, text="Please enter the message you want to send"
 messageToSendText.pack()
 messageToSend = Entry(root, width=50, justify="center")
 messageToSend.pack()
-startBotNoPic = Button(root, text="Start Bot WITH MESSAGE ONLY", command=lambda: InstaBotNoPic(numberOfMessages.get(),
+startBotNoPic = Button(root, text="Start Bot WITH MESSAGE ONLY", command=lambda: InstaBotNoPic(100000,
                                                                                                messageToSend.get()))
 startBotNoPic.pack()
 space = Label(root, text="")
@@ -165,7 +165,7 @@ imageToSend.pack()
 
 
 #code a button to start InstaBot()
-startBotWitPic = Button(root, text="Start Bot WITH WESSAGE AND PICTURE", command=lambda: InstaBotPic(numberOfMessages.get(), messageToSend.get(), imageToSend.get()))
+startBotWitPic = Button(root, text="Start Bot WITH MESSAGE AND PICTURE", command=lambda: InstaBotPic(100000, messageToSend.get(), imageToSend.get()))
 startBotWitPic.pack()
 makeSureWarning = Label(root, text="Make sure the path is the full path, otherwise will crash\n"
                                    "To get the full image path\nRight click on the picture>Properties>Security>Object"
